@@ -68,7 +68,9 @@ public class SegaDreamcastLoader extends AbstractLibrarySupportLoader {
 	}
 
 	@Override
-	protected void load(ByteProvider provider, LoadSpec loadSpec, List<Option> options, Program program, TaskMonitor monitor, MessageLog log) throws CancelledException, IOException {
+	protected void load(Program program, Loader.ImporterSettings settings) throws CancelledException, IOException {
+		ByteProvider provider = settings.provider();
+		MessageLog log = settings.log();
 		FlatProgramAPI fpa = new FlatProgramAPI(program);
 		createSegments(fpa, log);
 		
@@ -77,7 +79,7 @@ public class SegaDreamcastLoader extends AbstractLibrarySupportLoader {
 	}
 
 	@Override
-	public List<Option> getDefaultOptions(ByteProvider provider, LoadSpec loadSpec,	DomainObject domainObject, boolean isLoadIntoProgram) {
+	public List<Option> getDefaultOptions(ByteProvider provider, LoadSpec loadSpec,	DomainObject domainObject, boolean loadIntoProgram, boolean advanced) {
 		
 		List<Option> list = new ArrayList<>();
 		
